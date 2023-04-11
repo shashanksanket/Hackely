@@ -11,8 +11,6 @@ import App from './App.vue'
 import './global-components'
 
 // 3rd party plugins
-// import { TroisJSVuePlugin } from 'troisjs';
-// App.use(TroisJSVuePlugin);
 import '@axios'
 import '@/libs/acl'
 import '@/libs/portal-vue'
@@ -23,7 +21,6 @@ import '@/libs/vue-select'
 import '@/libs/tour'
 
 // Axios Mock Adapter
-// import { TroisJSVuePlugin } from 'troisjs';
 import '@/@fake-db/db'
 
 // BSV Plugin Registration
@@ -32,6 +29,9 @@ Vue.use(ModalPlugin)
 
 // Composition API
 Vue.use(VueCompositionAPI)
+import Vidle from 'v-idle'
+
+Vue.use(Vidle)
 
 // Feather font icon - For form-wizard
 // * Shall remove it if not using font-icons of feather-icons - For form-wizard
@@ -46,16 +46,12 @@ require('@/assets/scss/style.scss')
 import vueCountryRegionSelect from 'vue-country-region-select'
 
 Vue.use(vueCountryRegionSelect);
-import AOS from 'aos'
-import 'aos/dist/aos.css'
+
 Vue.config.productionTip = false
-// Vue.use(TroisJSVuePlugin);
+
 new Vue({
   router,
   store,
   i18n,
   render: h => h(App),
-  mounted() {
-    AOS.init()
-  },
 }).$mount('#app')

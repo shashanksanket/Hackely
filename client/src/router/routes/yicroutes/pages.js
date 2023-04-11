@@ -1,21 +1,22 @@
 export default [
-
   {
-    path:'/login',
-    name:'login',
-    component: () => import("@/components/auth/login"),
+    path: '/home',
+    name: 'home',
+    component: () => import("@/components/pages/home.vue"),
     meta: {
       layout: "full",
-      
+      authReq: true,
+
     },
   },
   {
-    path:'/register',
-    name:'register',
-    component: () => import("@/components/auth/register.vue"),
+    path: '/landing',
+    name: 'landing',
+    component: () => import("@/components/pages/home.vue"),
     meta: {
       layout: "full",
-      
+      authReq: false,
+
     },
   },
 ]

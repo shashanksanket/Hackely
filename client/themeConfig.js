@@ -9,9 +9,9 @@ export const $themeBreakpoints = {}
 // APP CONFIG
 export const $themeConfig = {
   app: {
-    appName: 'Portfolio', // Will update name in navigation menu (Branding)
-    // eslint-disable-next-line global-require
-    appLogoImage: require('@/assets/yicimages/logo/yic-logo-color.svg'), // Will update logo in navigation menu (Branding)
+    // appName: 'ComexComputer - DataBase Portal', // Will update name in navigation menu (Branding)
+    // // eslint-disable-next-line global-require
+    appLogoImage: require('@/assets/perImages/logo.svg'), // Will update logo in navigation menu (Branding)
   },
   layout: {
     isRTL: false,

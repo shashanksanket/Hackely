@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 // Routes
 import yicroutes from './routes/yicroutes'
+import store from '../store'
 
 Vue.use(VueRouter)
 
@@ -13,8 +14,7 @@ const router = new VueRouter({
     return { x: 0, y: 0 }
   },
   routes: [
-    // { path: '/', redirect: { name: 'dashboard-ecommerce' } },
-    { path: '/', redirect: { name: 'homePage' } },
+    { path: '/', redirect: { name: 'landing' } },
     ...yicroutes,
     {
       path: '*',
@@ -24,19 +24,30 @@ const router = new VueRouter({
 })
 
 router.beforeEach(async (to, _, next) => {
-
-  
-  
+  let isLoggedIn = router.app.$store.getters['auth/isAuthenticated']
+  let role = router.app.$store.getters['auth/role']
+  if (!isLoggedIn){
+    await router.app.$store.dispatch('auth/verifyUser')
+    isLoggedIn = router.app.$store.getters['auth/isAuthenticated']
+    role = router.app.$store.getters['auth/role']
+  }
+  if (!to.meta.authReq && !isLoggedIn){
+    return next()
+  }
+  if (!to.meta.authReq && isLoggedIn){
+    return next({name:'home'})
+  }
+  if(!isLoggedIn){
+    return next({name:"login"})
+  }
+  if (isLoggedIn){
+    
+    return next()
+  }
   return next()
 })
 
-//   let token = localStorage.getItem('feathers-jwt')
-//   const isLoggedIn = router.app.$store.getters['login/isAuthenticated']
-//   if(to.name != 'auth-login' && !token) {
-//     return next({ name: 'auth-login' })
-//   }else {  return next() }
-//   // return next()
-// })
+
 
 // ? For splash screen
 // Remove afterEach hook if you are not using splash screen
