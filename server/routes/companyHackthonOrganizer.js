@@ -1,5 +1,5 @@
 import companyHackthonModel from "../models/companyHackthon.js";
-import multer from "multer";
+// import multer from "multer";
 import path from "path";
 import router from "./authRoutes.js";
 // import fetchUser from "../models/fetchUser.js";
