@@ -1,7 +1,13 @@
 <template>
 	<div class="root">
 		<div class="logo">
-			<img style="margin-left: 5%; margin-top: 4%;" height="60rm" src="@/assets/perImages/logo.svg">
+			<img style="margin-left: 5%; margin-top: 2%;" height="60rm" src="@/assets/perImages/logo.svg">
+			<b-button @click.prevent="redirect('/landing')" style="margin-top:2%; margin-left:19%" variant="secondary"><svg
+					xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left"
+					viewBox="0 0 16 16">
+					<path fill-rule="evenodd"
+						d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+				</svg> Go Back</b-button>
 		</div>
 		<div class="container root-login">
 			<div class="login">
@@ -13,24 +19,41 @@
 				</div>
 				<b-form @submit="" @reset="" v-if="true">
 					<b-form-group label-size="lg" id="input-group-1" label="Email address:" label-for="input-1">
-						<b-form-input size="lg" style="border-radius:8px" id="input-1" v-model="form.email" type="email" placeholder="Enter email"
-							required></b-form-input>
+						<b-form-input size="lg" style="border-radius:8px" id="input-1" v-model="form.email" type="email"
+							placeholder="Enter email" required></b-form-input>
 					</b-form-group>
-
 					<b-form-group label-size="lg" id="input-group-2" label="Your Password:" label-for="input-2">
-						<b-form-input size="lg" style="height: 49px; border-radius:8px" id="input-2" v-model="form.password" type="password" placeholder="Enter Password"
-							required></b-form-input>
+						<b-form-input size="lg" style="height: 49px; border-radius:8px" id="input-2" v-model="form.password"
+							type="password" placeholder="Enter Password" required></b-form-input>
 					</b-form-group>
 					<br>
 					<b-button style="width:100%;" type="submit" @click.prevent="login()" variant="light">Submit</b-button>
 				</b-form>
 				<br>
-				<span class="span-register">Doesn’t have an Account? <span style="color:#1B419B; cursor: pointer; " @click.prevent="redirect('/register')">Register Now</span></span>
+				<span class="span-register">Doesn’t have an Account? <span style="color:#1B419B; cursor: pointer; "
+						@click.prevent="redirect('/register')">Register Now</span></span>
 				<br>
-				<span style="margin-top: 10%;" class="copyright-text">@2023 Hackely,Inc. All rights reserved. Terms - Privacy</span>
+				<span style="margin-top: 10%;" class="copyright-text">@2023 Hackely,Inc. All rights reserved. Terms -
+					Privacy</span>
 			</div>
-			<div class="login-image">
-				<img style="margin-left: 25%; width:80%" src="@/assets/perImages/frame-3.svg">
+			
+				<div class="slider">
+				<template>
+					<div>
+						<b-carousel id="carousel-1" v-model="slide" :interval="4000" controls indicators
+							 img-width="80%" style=" margin-left: 25%;"
+							@sliding-start="onSlideStart" @sliding-end="onSlideEnd">
+							
+							<b-carousel-slide  img-src="@/assets/perImages/slide.png"></b-carousel-slide>
+							<b-carousel-slide  img-src="@/assets/perImages/slide.png"></b-carousel-slide>
+							<b-carousel-slide  img-src="@/assets/perImages/slide.png"></b-carousel-slide>
+							<b-carousel-slide  img-src="@/assets/perImages/slide.png"></b-carousel-slide>
+						</b-carousel>
+					</div>
+				</template>
+
+
+				<!-- <img style="margin-left: 25%; width:80%" src="@/assets/perImages/frame-3.svg"> -->
 			</div>
 		</div>
 	</div>
@@ -93,27 +116,36 @@ export default {
 	},
 	data() {
 		return {
-			form:{
+			slide: 0,
+			sliding: null,
+			form: {
 
-				email:'',
+				email: '',
 				password: '',
 			}
 		};
 	},
+
 	methods: {
+		onSlideStart(slide) {
+			this.sliding = true
+		},
+		onSlideEnd(slide) {
+			this.sliding = false
+		},
 		...mapActions({
 			loginUser: "auth/loginUser"
 		}),
-		async redirect(){
-			this.$router.push('/register')
+		async redirect(val) {
+			this.$router.push(val)
 		},
-		async login(){
+		async login() {
 			await this.loginUser(this.form)
 			this.$router.push("/home")
 		},
-		goToStep: function(step) {
-            this.currentStep = step;
-        },
+		goToStep: function (step) {
+			this.currentStep = step;
+		},
 	},
 	mounted() {
 
@@ -132,21 +164,23 @@ export default {
 	width: 30%;
 
 }
-.copyright-text{
+
+.copyright-text {
 	position: absolute;
-width: 354px;
-height: 19px;
+	width: 354px;
+	height: 19px;
 
-font-family: 'Nunito Sans';
-font-style: normal;
-font-weight: 600;
-font-size: 14px;
-line-height: 19px;
+	font-family: 'Nunito Sans';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 19px;
 
 
-color: #717171;
+	color: #717171;
 }
-.root-login{
+
+.root-login {
 	display: flex;
 	flex-direction: row;
 }
@@ -195,19 +229,23 @@ color: #717171;
 	order: 0;
 	flex-grow: 0;
 }
-.span-register{
+
+.span-register {
 	width: 293px;
-height: 22px;
-font-family: 'Nunito Sans';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 22px;
-text-align: right;
-/* letter-spacing: 0.0875px; */
-color: #4F4F4F;
-flex: none;
-order: 3;
-flex-grow: 0;
+	height: 22px;
+	font-family: 'Nunito Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 22px;
+	text-align: right;
+	/* letter-spacing: 0.0875px; */
+	color: #4F4F4F;
+	flex: none;
+	order: 3;
+	flex-grow: 0;
+}
+.slider{
+	width: 45%;
 }
 </style>

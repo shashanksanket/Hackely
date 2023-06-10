@@ -50,7 +50,7 @@ router.post("/studentRegister", async (req, res) => {
         }
     } catch (error) {
         console.error(error);
-        return res.status(404).json({ message: "Error" });
+        // return res.status(404).json({ message: "Error" });
     }
 })
 const generateAccessToken = (user) => {

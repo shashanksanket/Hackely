@@ -2,6 +2,9 @@
 	<div class="root">
 		<div class="logo">
 			<img style="margin-left: 5%; margin-top: 4%;" height="60rm" src="@/assets/perImages/logo.svg">
+			<!-- <b-button @click.prevent="redirect('/landing')" style="margin-top:3%; margin-left:29%" variant="secondary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+</svg>  Go Back</b-button> -->
 		</div>
 		<div class="container root-register">
 			<div class="register">
@@ -78,7 +81,7 @@
 						<b-button style="width:40%;  margin-right:20%;"  @click.prevent="goToStep(2)"
 							variant="outline-dark">Back</b-button>
 							
-						<b-button style="width:40%;" @click.prevent="register()"
+						<b-button style="width:40%;" @click.prevent="register('/register')"
 							variant="dark">Create Account</b-button>
 					</div>
 				</b-form>
@@ -86,8 +89,24 @@
 				<span style="margin-top: 10%;" class="copyright-text">@2023 Hackely,Inc. All rights reserved. Terms -
 					Privacy</span>
 			</div>
-			<div class="register-image">
-				<img style="margin-left: 25%; width:80%" src="@/assets/perImages/frame-3.svg">
+			
+			<div class="slider">
+				<template>
+					<div>
+						<b-carousel id="carousel-1" v-model="slide" :interval="4000" controls indicators
+							 img-width="80%" style=" margin-left: 25%;"
+							@sliding-start="onSlideStart" @sliding-end="onSlideEnd">
+							
+							<b-carousel-slide  img-src="@/assets/perImages/slide.png"></b-carousel-slide>
+							<b-carousel-slide  img-src="@/assets/perImages/slide.png"></b-carousel-slide>
+							<b-carousel-slide  img-src="@/assets/perImages/slide.png"></b-carousel-slide>
+							<b-carousel-slide  img-src="@/assets/perImages/slide.png"></b-carousel-slide>
+						</b-carousel>
+					</div>
+				</template>
+
+
+				<!-- <img style="margin-left: 25%; width:80%" src="@/assets/perImages/frame-3.svg"> -->
 			</div>
 		</div>
 	</div>
@@ -177,6 +196,8 @@ export default {
 	},
 	data() {
 		return {
+			slide: 0,
+			sliding: null,
 			form:{
 
 				firstname: '',
@@ -202,6 +223,12 @@ export default {
 			  }),
 		  },
 	methods: {
+		onSlideStart(slide) {
+			this.sliding = true
+		},
+		onSlideEnd(slide) {
+			this.sliding = false
+		},
 		...mapActions({
 			registerUser: "auth/registerUser"
 		}),
@@ -218,7 +245,7 @@ export default {
 			}catch(e){
 				this.errors = e
 			}
-			if (registerSuccess){
+			if (this.registerSuccess){
 				this.$router.push('/login')
 			}
 		},
@@ -271,6 +298,9 @@ color: #4F4F4F;
 flex: none;
 order: 1;
 flex-grow: 0;
+}
+.slider{
+	width: 50%;
 }
 .copyright-text {
 	position: absolute;
