@@ -12,7 +12,7 @@ export default [
   {
     path: '/landing',
     name: 'landing',
-    component: () => import("@/components/pages/home.vue"),
+    component: () => import("@/components/pages/landing.vue"),
     meta: {
       layout: "full",
       authReq: false,

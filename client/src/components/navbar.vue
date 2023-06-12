@@ -4,7 +4,9 @@
     <b-navbar-nav style="margin-top:5px; margin-left:80px;" href="#"><img class="logo" height="60rm" src="@/assets/perImages/logo.svg"></b-navbar-nav>
     <b-collapse id="nav-collapse" is-nav v-if="$mq === 'largeDevices'">
       <b-navbar-nav class="navMain" style="font-size: larger; margin-left: 5%;">
-        <b-nav-item style="margin-left:5%" @click="redirect('hackathons')">Hackathons</b-nav-item>
+        <b-nav-item style="margin-left:5%" @click="redirect('hackathons')">
+			Hackathons
+		</b-nav-item>
         <b-nav-item style="margin-left:5%" @click="redirect('forums')">Forums</b-nav-item>
       </b-navbar-nav>
       <b-navbar-nav class="navMain" style="font-size: larger; margin-right:80px; margin-left: auto; align-self: right;">
