@@ -15,7 +15,9 @@ mongoose.connect("mongodb+srv://navi:navi@cluster0.segpgcr.mongodb.net/?retryWri
 })
 
 //Routes
-
+app.use(cors({
+    origin: 'http://65.0.87.90/'
+  }));
 app.use("/api/auth", authRoutes);
 app.use("/api/hackathons", companyRoutes);
 
