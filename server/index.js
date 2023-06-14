@@ -15,13 +15,10 @@ mongoose.connect("mongodb+srv://navi:navi@cluster0.segpgcr.mongodb.net/?retryWri
 })
 
 //Routes
-app.use(cors({
-    origin: 'http://65.2.149.237/'
-  }));
 app.use("/api/auth", authRoutes);
 app.use("/api/hackathons", companyRoutes);
 
-app.listen(4000, () => {
-    console.log("Server started");
-})
+app.listen(4000, 'localhost', () => {
+    console.log("Server started on port 4000");
+  });
 
