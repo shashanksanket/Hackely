@@ -31,9 +31,15 @@ export default {
 	
 	actions: {
 		loginUser: async ({ commit,state }, payload) => {
-			const res = await axios.post("http://localhost:4000/api/auth/login",{
-				payload
-			})
+			try{
+
+				const res = await axios.post("http://localhost:4000/api/auth/login",{
+					payload
+				})
+			}
+			catch(e){
+				console.log(e)
+			}
 			// state.role = res.data.user.role
 			const token = res.data.accessToken
 			localStorage.setItem('access_token',token)
